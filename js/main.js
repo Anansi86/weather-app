@@ -13,6 +13,9 @@ async function getWeatherStats(url) {
 
 getWeatherStats ('https://api.openweathermap.org/data/2.5/weather?zip=40517,&appid=b3c018f0dfc43f2b89e60d312fecae01');
 
+//
+
+
 var inputForm = `
 <h1>Weather App</h1>
 
@@ -23,10 +26,10 @@ var inputForm = `
 </div>
 <button type="submit" class="btn btn-primary mb-2">Check Weather</button>
 </form>
-<div>
+<div id="results">
     <div class="card">
         <div class="card-header">
-          Featured
+          City
         </div>
         <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
@@ -34,21 +37,21 @@ var inputForm = `
       </div>
       <div class="card">
         <div class="card-header">
-          Featured
+         Temperatur
         </div>
         <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
         </div>
       </div> <div class="card">
         <div class="card-header">
-          Featured
+          Condition
         </div>
         <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
         </div>
       </div> <div class="card">
         <div class="card-header">
-          Featured
+          Other Info
         </div>
         <div class="card-body">
           <h5 class="card-title">Special title treatment</h5>
@@ -58,7 +61,7 @@ var inputForm = `
 `;
 
 document.getElementById("main").innerHTML = inputForm;
-
+document.getElementById('results').style.display ="none";
 // var tag = document.createElement("input");
 //    tag.classList.add("mystyle");
 //    var text = document.createTextNode("Do I is the best e-learning platform");
