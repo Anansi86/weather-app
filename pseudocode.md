@@ -2,6 +2,9 @@ Vars
 Input box for zip/button - input
 
 apiKey = b3c018f0dfc43f2b89e60d312fecae01
+
+
+in api call {} goes away too!!!!
 var api = “https://api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={b3c018f0dfc43f2b89e60d312fecae01}”
 
 Let state = {
