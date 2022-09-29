@@ -1,11 +1,17 @@
+//Run an onClick or onSubmit that executes an Axios GET request to retrieve weather data from the API.
+//If the request is unsuccessful, display a specific error message such as "Invalid Zip Code" or anything else that might come back from the API.
 
-
-let weatherStats = [];
+let weatherStats = [
+            
+];
+        
 
 async function getWeatherStats(url) {
     try {
         const response = await axios.get(url);  
-        console.log(response.data);  
+      // console.log(response.data);  
+        weatherStats = response.data;
+        return weatherStats;
     } catch (error) {
 
     }
@@ -70,6 +76,7 @@ for (var i = 0; i < 4; i++) {
   cardBody.setAttribute("class", "card-body");
   card.appendChild(cardBody);
 
+  // make a loop for columns in temp card
   if (i === 1) {
     
     //<div class="row"></div>
@@ -88,11 +95,13 @@ for (var i = 0; i < 4; i++) {
   let placeHolder = document.createElement("h1");
   placeHolder.setAttribute("class", "card-title");
   cardBody.appendChild(placeHolder);
+
 }
 
 
- document.getElementById('results').style.display ="none";
-  //to show an element
+document.getElementById('results').style.display ="none";
+
+// to show an element
 function unHideMe() {
-    document.getElementById("results").style.display = "block";
-}  
+  document.getElementById("results").style.display = "block";
+}
