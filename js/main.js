@@ -50,79 +50,49 @@ result.setAttribute("id", "results");
 inputForm.appendChild(result);
 
 //<div class="card">
-let card = document.createElement("div");
-card.setAttribute("class", "card");
-result.appendChild(card);
+const headerTitles= ["City", "Temperature", "Condition", "Other Info" ]
 
-//<div class="card-header">
-let cardHeader = document.createElement("div");
-cardHeader.setAttribute("class", "card-header");
-cardHeader.innerText = "City";
-card.appendChild(cardHeader);
+for (var i = 0; i < 4; i++) {
+  
+  let card = document.createElement("div");
+  card.setAttribute("class", "card");
+  card.setAttribute("id", "card");
+  result.appendChild(card);
 
-//<div class="card-body"></div>
-let cardBody = document.createElement("div");
-cardBody.setAttribute("class", "card-body");
-card.appendChild(cardBody);
+  //<div class="card-header">
+  let cardHeader = document.createElement("div");
+  cardHeader.setAttribute("class", "card-header");
+  cardHeader.innerText = headerTitles[i];
+  card.appendChild(cardHeader);
+
+  //<div class="card-body"></div>
+  let cardBody = document.createElement("div");
+  cardBody.setAttribute("class", "card-body");
+  card.appendChild(cardBody);
+
+  if (i === 1) {
+    
+    //<div class="row"></div>
+    let row = document.createElement("div");
+    row.setAttribute("class", "row");
+    cardBody.appendChild(row);
+
+    //<div class="col"></div>
+    let col = document.createElement("div");
+    col.setAttribute("class", "col");
+    row.appendChild(col);
+
+  }
+
+  //<h5 class="card-title">Special title treatment</h5>
+  let placeHolder = document.createElement("h1");
+  placeHolder.setAttribute("class", "card-title");
+  cardBody.appendChild(placeHolder);
+}
 
 
-
-
-
-
-
-/*
-var inputForm = `
-<h1>Weather App</h1>
-
-<form class="form-inline">
-<div class="form-group mx-sm-3 mb-2">
-  <label for="inputZipcode" class="sr-only">Zipcode</label>
-  <input type="text" class="form-control" id="inputZipcode" placeholder="Enter zipcode">
-</div>
-<button type="submit" class="btn btn-primary mb-2">Check Weather</button>
-</form>
-<div id="results">
-    <div class="card">
-        <div class="card-header">
-          City
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header">
-         Temperatur
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-        </div>
-      </div> <div class="card">
-        <div class="card-header">
-          Condition
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-        </div>
-      </div> <div class="card">
-        <div class="card-header">
-          Other Info
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-        </div>
-      </div>
-</div>
-`; */
-
-/*
- document.getElementById("main").innerHTML = inputForm;
-const element = document.getElementById("main");
-element.appendChild(inputForm);
  document.getElementById('results').style.display ="none";
   //to show an element
 function unHideMe() {
     document.getElementById("results").style.display = "block";
 }  
-*/
