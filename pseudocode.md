@@ -52,3 +52,11 @@ handleError()-element or a lot
 
 
 Wireframe for pc
+
+let container = document.createElement('div')
+let button = document.createElement('form-inLine')
+
+container.setAttribute('class', 'container');
+button.innerText = "subscribe";
+container.appendChild (button);
+document.getElementById('main').appendChild('container')
