@@ -1,23 +1,47 @@
 //Run an onClick or onSubmit that executes an Axios GET request to retrieve weather data from the API.
 //If the request is unsuccessful, display a specific error message such as "Invalid Zip Code" or anything else that might come back from the API.
+//when onclick run unHideMe
 
-let weatherStats = [
-            
-];
-        
+let object = {
+    city: "",
+    temperature: "",
+    condition: "",
+    otherInfo: "",
+}
 
+//function convertTemp(object) {
+//  let farenheight = 0
+//  farenheight = 9/5(object[1] - 273) + 32
+//  return farenheight;
+
+/*function temperatureConverter() {
+  valNum = parseFloat(valNum);
+  document.getElementById("temp").innerHTML=((valNum-273.15)*1.8)+32;
+} */
+function displayWeatherData()  {
+  document.getElementById("cardiB").innerText = object.city
+}
+
+function updateState(data) {
+  object.city = data.name
+  object.temperature = data.main.temp
+  object.condition = data.weather[0].main
+  object.otherInfo = data.weather[0].icon
+}
+
+         
 async function getWeatherStats(url) {
     try {
         const response = await axios.get(url);  
-      // console.log(response.data);  
-        weatherStats = response.data;
-        return weatherStats;
+        console.log(response.data);
+        updateState(response.data);
     } catch (error) {
 
     }
 }
 
-getWeatherStats ('https://api.openweathermap.org/data/2.5/weather?zip=40517,&appid=b3c018f0dfc43f2b89e60d312fecae01');
+// getWeatherStats ('https://api.openweathermap.org/data/2.5/weather?zip=40419,&appid=b3c018f0dfc43f2b89e60d312fecae01');
+
 
 // <form class="form-inline">
 let inputForm = document.createElement("form");
@@ -46,8 +70,9 @@ divInsideForm.appendChild(zipcodeInput);
 // <button type="submit" class="btn btn-primary mb-2">Check Weather</button>
 let buttonInput = document.createElement("button");
 buttonInput.setAttribute("type", "submit");
+buttonInput.setAttribute("id", "btn")
 buttonInput.setAttribute("class", "btn btn-primary mb-2");
-buttonInput.innerText = "Submit";
+buttonInput.innerText = "peanutbutter weather time!";
 inputForm.appendChild(buttonInput);
 
 //<div id="results"></div>
@@ -77,7 +102,7 @@ for (var i = 0; i < 4; i++) {
   card.appendChild(cardBody);
 
   // make a loop for columns in temp card
-  if (i === 1) {
+  //if (i === 1) {
     
     //<div class="row"></div>
     let row = document.createElement("div");
@@ -89,7 +114,7 @@ for (var i = 0; i < 4; i++) {
     col.setAttribute("class", "col");
     row.appendChild(col);
 
-  }
+ // }
 
   //<h5 class="card-title">Special title treatment</h5>
   let placeHolder = document.createElement("h1");
@@ -99,9 +124,18 @@ for (var i = 0; i < 4; i++) {
 }
 
 
+// document.getElementById("btn").addEventListener("click", unHideMe);
 document.getElementById('results').style.display ="none";
 
-// to show an element
-function unHideMe() {
+function unHideMe(e) {
+  // Next step:
+  // Read the zip code from the text field
+  let zipcode = document.getElementById("inputZipcode").value;
+  // Then put the zip code from the text field into the URL below:
+  getWeatherStats ('https://api.openweathermap.org/data/2.5/weather?zip='+zipcode+',&appid=b3c018f0dfc43f2b89e60d312fecae01');
   document.getElementById("results").style.display = "block";
+  e.preventDefault();
+
 }
+
+document.getElementById("btn").addEventListener("click", unHideMe);
