@@ -45,7 +45,10 @@ async function getWeatherStats(url) {
         console.log(response.data);
         updateState(response.data);
     } catch (error) {
-
+      var audio = new Audio('ah-ah-ah-you-didnt-say-the-magic-word.mp3');
+      audio.play();
+        return alert("Nah uh uh you didn't use a valid zipcode!")
+        
     }
 }
 
@@ -157,6 +160,8 @@ function unHideMe(e) {
   // Then put the zip code from the text field into the URL below:
   getWeatherStats ("https://api.openweathermap.org/data/2.5/weather?zip="+zipcode+",&appid=b3c018f0dfc43f2b89e60d312fecae01");
   document.getElementById("results").style.display = "block";
+  var audio = new Audio('the-weather-outside-is-weather.mp3');
+audio.play();
   e.preventDefault();
 
 }
