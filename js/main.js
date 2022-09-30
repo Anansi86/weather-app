@@ -3,10 +3,10 @@
 //when onclick run unHideMe
 //state 
 let object = {
-    city: "",
-    temperature: "",
-    condition: "",
-    otherInfo: "",
+  city: "",
+  temperature: "",
+  condition: "",
+  otherInfo: "",
 }
 
 //function convertTemp(object) {
@@ -16,12 +16,12 @@ let object = {
 
 function temperatureConverter() {
   temperature = parseFloat(object.temperature);
-  document.getElementById("col1").innerHTML=object.temperature + " °K";
-  document.getElementById("col2").innerHTML=Math.round((temperature-273.15)*1.8)+32 + " °F";
-  document.getElementById("col3").innerHTML=Math.round((temperature - 273.15)) + " °C";
-} 
+  document.getElementById("col1").innerHTML = object.temperature + " °K";
+  document.getElementById("col2").innerHTML = Math.round((temperature - 273.15) * 1.8) + 32 + " °F";
+  document.getElementById("col3").innerHTML = Math.round((temperature - 273.15)) + " °C";
+}
 
-function displayWeatherData()  {
+function displayWeatherData() {
   document.getElementById("city").innerText = object.city
   temperatureConverter();
   document.getElementById("condition").innerText = object.condition
@@ -38,18 +38,18 @@ function updateState(data) {
   displayWeatherData()
 }
 
-         
+
 async function getWeatherStats(url) {
-    try {
-        const response = await axios.get(url);  
-        console.log(response.data);
-        updateState(response.data);
-    } catch (error) {
+  try {
+      const response = await axios.get(url);
+      console.log(response.data);
+      updateState(response.data);
+  } catch (error) {
       var audio = new Audio('ah-ah-ah-you-didnt-say-the-magic-word.mp3');
       audio.play();
-        return alert("Nah uh uh you didn't use a valid zipcode!")
-        
-    }
+      return alert("Nah uh uh you didn't use a valid zipcode!")
+
+  }
 }
 
 // <form class="form-inline">
@@ -85,16 +85,16 @@ buttonInput.innerText = "peanutbutter weather time!";
 inputForm.appendChild(buttonInput);
 
 //<div id="results"></div>
-let  result = document.createElement("div");
+let result = document.createElement("div");
 result.setAttribute("id", "results");
 inputForm.appendChild(result);
 
 //<div class="card">
-const headerTitles = ["City", "Temperature", "Condition", "Other Info" ]
+const headerTitles = ["City", "Temperature", "Condition", "Other Info"]
 const bodyIds = ["city", "temperature", "condition", "otherInfo"]
 
 for (var i = 0; i < 4; i++) {
-  
+
   let card = document.createElement("div");
   card.setAttribute("class", "card");
   card.setAttribute("id", "card");
@@ -113,30 +113,30 @@ for (var i = 0; i < 4; i++) {
 
   // make a loop for columns in temp card
   if (i === 1) {
-    
-    //<div class="row"></div>
-    let row = document.createElement("div");
-    row.setAttribute("class", "row");
-    cardBody.appendChild(row);
 
-    //<div class="col"></div>
-    let col = document.createElement("div");
-    col.setAttribute("class", "col");
-    col.setAttribute("id", "col1")
-    row.appendChild(col); 
-    document.getElementById("col1").innerText = "hello"
+      //<div class="row"></div>
+      let row = document.createElement("div");
+      row.setAttribute("class", "row");
+      cardBody.appendChild(row);
 
-    let col2 = document.createElement("div");
-    col2.setAttribute("class", "col");
-    col2.setAttribute("id", "col2")
-    row.appendChild(col2); 
-    document.getElementById("col2").innerText = "hi"
+      //<div class="col"></div>
+      let col = document.createElement("div");
+      col.setAttribute("class", "col");
+      col.setAttribute("id", "col1")
+      row.appendChild(col);
+      document.getElementById("col1").innerText = "hello"
 
-    let col3 = document.createElement("div");
-    col3.setAttribute("class", "col");
-    col3.setAttribute("id", "col3")
-    row.appendChild(col3); 
-    document.getElementById("col3").innerText= "bye"
+      let col2 = document.createElement("div");
+      col2.setAttribute("class", "col");
+      col2.setAttribute("id", "col2")
+      row.appendChild(col2);
+      document.getElementById("col2").innerText = "hi"
+
+      let col3 = document.createElement("div");
+      col3.setAttribute("class", "col");
+      col3.setAttribute("id", "col3")
+      row.appendChild(col3);
+      document.getElementById("col3").innerText = "bye"
   }
 
   //<h1 class="card-title">Special title treatment</h1>
@@ -151,17 +151,17 @@ document.getElementById("otherInfo").appendChild(iconImg);
 
 
 // document.getElementById("btn").addEventListener("click", unHideMe);
-document.getElementById('results').style.display ="none";
+document.getElementById('results').style.display = "none";
 
 function unHideMe(e) {
   // Next step:
   // Read the zip code from the text field
   let zipcode = document.getElementById("inputZipcode").value;
   // Then put the zip code from the text field into the URL below:
-  getWeatherStats ("https://api.openweathermap.org/data/2.5/weather?zip="+zipcode+",&appid=b3c018f0dfc43f2b89e60d312fecae01");
+  getWeatherStats("https://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + ",&appid=b3c018f0dfc43f2b89e60d312fecae01");
   document.getElementById("results").style.display = "block";
   var audio = new Audio('the-weather-outside-is-weather.mp3');
-audio.play();
+  audio.play();
   e.preventDefault();
 
 }
