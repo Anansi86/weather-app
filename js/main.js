@@ -1,7 +1,7 @@
 //Run an onClick or onSubmit that executes an Axios GET request to retrieve weather data from the API.
 //If the request is unsuccessful, display a specific error message such as "Invalid Zip Code" or anything else that might come back from the API.
 //when onclick run unHideMe
-
+//state 
 let object = {
     city: "",
     temperature: "",
@@ -14,12 +14,20 @@ let object = {
 //  farenheight = 9/5(object[1] - 273) + 32
 //  return farenheight;
 
-/*function temperatureConverter() {
-  valNum = parseFloat(valNum);
-  document.getElementById("temp").innerHTML=((valNum-273.15)*1.8)+32;
-} */
+function temperatureConverter() {
+  temperature = parseFloat(object.temperature);
+  document.getElementById("col1").innerHTML=object.temperature + " °K";
+  document.getElementById("col2").innerHTML=Math.round((temperature-273.15)*1.8)+32 + " °F";
+  document.getElementById("col3").innerHTML=Math.round((temperature - 273.15)) + " °C";
+} 
+
 function displayWeatherData()  {
-  document.getElementById("cardiB").innerText = object.city
+  document.getElementById("city").innerText = object.city
+  temperatureConverter();
+  document.getElementById("condition").innerText = object.condition
+  //document.getElementById("otherInfo").innerText = object.otherInfo
+  iconImg.setAttribute("src", "http://openweathermap.org/img/wn/" + object.otherInfo + "@2x.png");
+  //temperatureConverter()
 }
 
 function updateState(data) {
@@ -27,6 +35,7 @@ function updateState(data) {
   object.temperature = data.main.temp
   object.condition = data.weather[0].main
   object.otherInfo = data.weather[0].icon
+  displayWeatherData()
 }
 
          
@@ -39,9 +48,6 @@ async function getWeatherStats(url) {
 
     }
 }
-
-// getWeatherStats ('https://api.openweathermap.org/data/2.5/weather?zip=40419,&appid=b3c018f0dfc43f2b89e60d312fecae01');
-
 
 // <form class="form-inline">
 let inputForm = document.createElement("form");
@@ -81,7 +87,8 @@ result.setAttribute("id", "results");
 inputForm.appendChild(result);
 
 //<div class="card">
-const headerTitles= ["City", "Temperature", "Condition", "Other Info" ]
+const headerTitles = ["City", "Temperature", "Condition", "Other Info" ]
+const bodyIds = ["city", "temperature", "condition", "otherInfo"]
 
 for (var i = 0; i < 4; i++) {
   
@@ -102,7 +109,7 @@ for (var i = 0; i < 4; i++) {
   card.appendChild(cardBody);
 
   // make a loop for columns in temp card
-  //if (i === 1) {
+  if (i === 1) {
     
     //<div class="row"></div>
     let row = document.createElement("div");
@@ -112,16 +119,32 @@ for (var i = 0; i < 4; i++) {
     //<div class="col"></div>
     let col = document.createElement("div");
     col.setAttribute("class", "col");
-    row.appendChild(col);
+    col.setAttribute("id", "col1")
+    row.appendChild(col); 
+    document.getElementById("col1").innerText = "hello"
 
- // }
+    let col2 = document.createElement("div");
+    col2.setAttribute("class", "col");
+    col2.setAttribute("id", "col2")
+    row.appendChild(col2); 
+    document.getElementById("col2").innerText = "hi"
 
-  //<h5 class="card-title">Special title treatment</h5>
+    let col3 = document.createElement("div");
+    col3.setAttribute("class", "col");
+    col3.setAttribute("id", "col3")
+    row.appendChild(col3); 
+    document.getElementById("col3").innerText= "bye"
+  }
+
+  //<h1 class="card-title">Special title treatment</h1>
   let placeHolder = document.createElement("h1");
   placeHolder.setAttribute("class", "card-title");
+  cardBody.setAttribute("id", bodyIds[i]);
   cardBody.appendChild(placeHolder);
-
 }
+
+let iconImg = document.createElement("img")
+document.getElementById("otherInfo").appendChild(iconImg);
 
 
 // document.getElementById("btn").addEventListener("click", unHideMe);
@@ -132,7 +155,7 @@ function unHideMe(e) {
   // Read the zip code from the text field
   let zipcode = document.getElementById("inputZipcode").value;
   // Then put the zip code from the text field into the URL below:
-  getWeatherStats ('https://api.openweathermap.org/data/2.5/weather?zip='+zipcode+',&appid=b3c018f0dfc43f2b89e60d312fecae01');
+  getWeatherStats ("https://api.openweathermap.org/data/2.5/weather?zip="+zipcode+",&appid=b3c018f0dfc43f2b89e60d312fecae01");
   document.getElementById("results").style.display = "block";
   e.preventDefault();
 
